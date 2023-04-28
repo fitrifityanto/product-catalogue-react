@@ -4,15 +4,18 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useConfirm } from 'material-ui-confirm'
 import { Delete, Edit } from '@mui/icons-material'
+import CustomSnackbar from './CustomSnackbar'
 
 
 function Table({filteredData, isSearch, setIsSearch}) {
     const {products, fetchProducts, isLoading } = useContext(GlobalContext)
+
     useEffect (() => {
         fetchProducts()
     },[])
 
-    const confirm =useConfirm()
+
+    const confirm = useConfirm()
 
     const onDelete = async (product) => {
         try {
@@ -92,7 +95,7 @@ function Table({filteredData, isSearch, setIsSearch}) {
 
   return (
     <>
-
+      <CustomSnackbar/>
         <table className='border-collapse'>
             <thead className='bg-teal-500 text-white'>
             <tr>

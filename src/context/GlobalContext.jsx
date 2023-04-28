@@ -8,16 +8,10 @@ export const ContextProvider = ({children}) => {
     const [products, setProducts] = useState ([])
 
     const fetchProducts = async () => {
-        console.log('sedang melakukan fetch')
+        // console.log('sedang melakukan fetch')
         try {
         setIsLoading(true)
-           const response = await axios.get('https://api-project.amandemy.co.id/api/final/products',
-           {
-               headers: {
-                   Authorization: `Bearer ${localStorage.getItem('token')}`,
-               },
-           }
-           ) 
+           const response = await axios.get('https://api-project.amandemy.co.id/api/final/products') 
            setProducts(response.data.data)
            
         } catch (error) {

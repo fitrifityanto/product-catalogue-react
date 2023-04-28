@@ -1,15 +1,28 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { SnackbarContext } from '../context/SnackbarContext'
+
+
 
 
 function LoginForm() {
+    const {setOpen, setSeverity, setMessage} = useContext(SnackbarContext)
+
     const [input, setInput] = useState({
         email:'',
         password:'',
     })
 
     const navigate = useNavigate()
+    
+    const handleAlertOpen = () => {
+        setOpen(true)
+        setSeverity('success')
+        setMessage('berhasil login')
+        navigate('/table')
+    }
+
 
     const handleChange = (event) => {
         let key = event.target.name
@@ -25,18 +38,21 @@ function LoginForm() {
             })
             localStorage.setItem('token', response.data.data.token)
             localStorage.setItem('username', response.data.data.user.username)
-            alert(response.data.info)
-            
+            // alert(response.data.info)
+            if (response.data.data.token) {
+                handleAlertOpen()
+            }
+           
             setInput({
                 email:'',
                 password:''
             })
-            navigate('/table')
         } catch (error) {
-            alert(error.response.data.info)
-           console.log(error.response.data.info)
+            alert(error)
+           console.log(error)
         } 
     }
+
 
     return (
         <div>
