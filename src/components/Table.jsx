@@ -5,17 +5,17 @@ import axios from 'axios'
 import { useConfirm } from 'material-ui-confirm'
 import { Delete, Edit } from '@mui/icons-material'
 import CustomSnackbar from './CustomSnackbar'
+import { SnackbarContext } from '../context/SnackbarContext'
 
 
 function Table({filteredData, isSearch, setIsSearch}) {
     const {products, fetchProducts, isLoading } = useContext(GlobalContext)
-
+    const {setOpen, setSeverity, setMessage} = useContext(SnackbarContext)
     useEffect (() => {
         fetchProducts()
     },[])
 
-
-    const confirm = useConfirm()
+    const confirm =useConfirm()
 
     const onDelete = async (product) => {
         try {
@@ -26,10 +26,14 @@ function Table({filteredData, isSearch, setIsSearch}) {
                 },
             }
             )
-            alert(`berhasil menghapus produk id ${product.id}` )
+            setOpen(true)
+            setSeverity('success')
+            setMessage(`berhasil menghapus produk : '${product.name}'`)
         } catch (error) {
+            setOpen(true)
+            setSeverity('error')
+            setMessage('gagal melakukan delete produk')
             console.log(error.response.data)
-            alert('gagal melakukan delete produk')
         } finally {
             setIsSearch(false)
             fetchProducts()
@@ -95,7 +99,7 @@ function Table({filteredData, isSearch, setIsSearch}) {
 
   return (
     <>
-      <CustomSnackbar/>
+        <CustomSnackbar/>
         <table className='border-collapse'>
             <thead className='bg-teal-500 text-white'>
             <tr>

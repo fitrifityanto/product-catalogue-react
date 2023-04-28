@@ -1,8 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { SnackbarContext } from '../context/SnackbarContext'
+import CustomSnackbar from './CustomSnackbar'
 
 function UpdateForm() {
+    const {setOpen, setSeverity, setMessage} = useContext(SnackbarContext)
+
     const navigate = useNavigate()
     const {id} = useParams()
 
@@ -56,10 +60,14 @@ function UpdateForm() {
                 },
             }
             )
-            alert(`berhasil mengubah produk '${input.name}' `)
+            setOpen(true)
+            setSeverity('success')
+            setMessage(`berhasil mengubah produk '${input.name}' `)
             navigate('/table')
         } catch (error) {
-            alert(error.response.data.info)
+            setOpen(true)
+            setSeverity('error')
+            setMessage(error.response.data.info)
         }
     }
 
@@ -89,6 +97,7 @@ function UpdateForm() {
 
   return (
     <>
+    <CustomSnackbar />
     <div className="grid gap-4 lg:grid-col-5 md:grid-col-3">
         <div className="lg:col-span-3 md:col-span-2">
             <label className="block mb-2"> Nama Barang </label>

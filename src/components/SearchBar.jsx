@@ -1,8 +1,7 @@
 import React from 'react'
 
-function SearchBar({onSearch, onReset, selectedCategory, setSelectedCategory, input, setInput}) {
 
-    
+function SearchBar({onSearch, onReset, selectedCategory, setSelectedCategory, input, setInput}) {  
   return (
     <>
        <select 

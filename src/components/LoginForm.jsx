@@ -2,27 +2,24 @@ import axios from 'axios'
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { SnackbarContext } from '../context/SnackbarContext'
-
-
+import CustomSnackbar from './CustomSnackbar'
 
 
 function LoginForm() {
     const {setOpen, setSeverity, setMessage} = useContext(SnackbarContext)
-
     const [input, setInput] = useState({
         email:'',
         password:'',
     })
 
     const navigate = useNavigate()
-    
+
     const handleAlertOpen = () => {
         setOpen(true)
         setSeverity('success')
         setMessage('berhasil login')
         navigate('/table')
     }
-
 
     const handleChange = (event) => {
         let key = event.target.name
@@ -39,23 +36,24 @@ function LoginForm() {
             localStorage.setItem('token', response.data.data.token)
             localStorage.setItem('username', response.data.data.user.username)
             // alert(response.data.info)
-            if (response.data.data.token) {
+            if (response.data.info == 'Berhasil Melakukan Login Pengguna') {
                 handleAlertOpen()
             }
-           
             setInput({
                 email:'',
                 password:''
             })
         } catch (error) {
-            alert(error)
-           console.log(error)
+            setOpen(true)
+            setSeverity('error')
+            setMessage(error.response.data.info)
+           console.log(error.response.data.info)
         } 
     }
 
-
     return (
         <div>
+            <CustomSnackbar />
             <div className='grid grid-col-2 gap-4'>
                 <label htmlFor='email'>Email</label>
                 <input 

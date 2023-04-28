@@ -1,8 +1,11 @@
 import axios from 'axios'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { SnackbarContext } from '../context/SnackbarContext'
+import CustomSnackbar from './CustomSnackbar'
 
 function RegisterForm() {
+    const {setOpen, setSeverity, setMessage} = useContext(SnackbarContext)
     const [input, setInput] = useState({
         name:'',
         username:'',
@@ -27,6 +30,14 @@ function RegisterForm() {
             setInput({...input, password_confirmation: event.target.value})
         }
     }
+
+    const handleAlertOpen = () => {
+        setOpen(true)
+        setSeverity('success')
+        setMessage('berhasil melakukan registrasi')
+        navigate('/login')
+    }
+
     const handleSubmit = async () => {
         try {
             const response = await axios.post('https://api-project.amandemy.co.id/api/register', {
@@ -38,7 +49,8 @@ function RegisterForm() {
             })
             const data_user = input
             console.log(JSON.stringify(data_user))
-            alert('berhasil registrasi')
+            handleAlertOpen()
+
             setInput({
                 name:'',
                 username:'',
@@ -47,7 +59,9 @@ function RegisterForm() {
                 password_confirmation:''
             })
         } catch (error) {
-            alert(error.response.data.info)
+            setOpen(true)
+            setSeverity('error')
+            setMessage(error.response.data.info)
            console.log(error.response.data.info)
         } finally {
             navigate('/login')
@@ -60,6 +74,7 @@ function RegisterForm() {
 
   return (
     <div>
+        <CustomSnackbar/>
         <div className='grid grid-col-3 gap-4'>
             <label htmlFor='name'>Name</label>
             <input 

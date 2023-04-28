@@ -2,9 +2,12 @@ import React, { useContext, useState } from 'react'
 import { GlobalContext } from '../context/GlobalContext'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { SnackbarContext } from '../context/SnackbarContext'
+import CustomSnackbar from './CustomSnackbar'
 
 function CreateForm() {
     const {fetchProducts } = useContext(GlobalContext)
+    const {setOpen, setSeverity, setMessage, setBgColor} = useContext(SnackbarContext)
 
     const [input, setInput] = useState({
         name: '',
@@ -69,11 +72,17 @@ function CreateForm() {
                 image_url:'',
                 description:'',
             })
-            alert('berhasil membuat produk')
+            // alert('berhasil membuat produk')
+            setOpen(true)
+            setSeverity('success')
+            setMessage('berhasil membuat produk')
+            setBgColor('teal')
             navigate('/table')
         } catch (error) {
-            alert(error.response.data.info)
-           
+            // alert(error.response.data.info)
+            setOpen(true)
+            setSeverity('error')
+            setMessage(error.response.data.info)
         }
     }
 
@@ -93,6 +102,7 @@ function CreateForm() {
 
   return (
     <>
+    <CustomSnackbar />
     <div className="grid gap-4 lg:grid-col-5 md:grid-col-3">
         <div className="lg:col-span-3 md:col-span-2">
             <label className="block mb-2"> Nama Barang </label>
