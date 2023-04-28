@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+li {
+    display: inline-block;
+  }
+  
+  .nav-items::after {
+    @apply border-b border-teal-500;
+    content: '';
+    display: block;
+    color: black;
+    /* margin: 0 auto; */
+    width: 35%;
+    
+    /* border-bottom: 1px solid black; */
+    visibility: hidden;
+  }
+
+  .nav-items:hover::after {
+    visibility: visible;
+}
