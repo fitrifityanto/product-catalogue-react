@@ -8,11 +8,11 @@ user dapat menambahkan, mengubah, dan menghapus data product tersebut setelah re
 
 
 ## Pages
-Home
-Product
-Register
-Login
-Table
+- Home
+- Product
+- Register
+- Login
+- Table
 
 
 ## API
@@ -31,7 +31,10 @@ material-ui-confirm
 
 ## Branch
 `main` berisi codingan yang saya kumpulkan sebagai tugas final project
+`develop` : 
+- styling alert (selain alert delete)
+- responsive navbar
 
 
 ## Links
-Website : [final-project-react-fitriningtyas.vercel.app](https://final-project-react-fitriningtyas.vercel.app/)
+Website (from branch develop) : [final-project-react-fitriningtyas.vercel.app](https://final-project-react-fitriningtyas.vercel.app/)
