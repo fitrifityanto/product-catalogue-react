@@ -1,15 +1,37 @@
-Ini adalah project react yang pertama yang saya deploy.
+# Website Product Catalogue
 
-Pertama kali nya saya ikut bootcamp selama 1 bulan (lebih sedikit). 
+simple website product Catalogue, dibuat untuk tugas final project saat mengikuti bootcamp di amandemy.
 
-Pada branch utama (`main`) adalah hasil tugas final project yang saya setor pada bootcamp tersebut.
+Website ini menampilkan sebagian product di homepage, dan untuk keseluruhan product ditampilkan pada product page.
 
-Tugas Final Project ini belum sempurna, seperti beberapa alert belum ada styling nya. hanya styling alert delete saja yang sudah saya styling menggunakan package `material-ui-confirm`.
+user dapat menambahkan, mengubah, dan menghapus data product tersebut setelah register akun dan login.
 
-Kemudian di branch `develop`, disana saya memperbaiki yang kurang.
 
-untuk pertama, yang saya tambahkan di branch `develop`:
-- styling alert (selain alert delete)
-- responsive navbar
+## Pages
+Home
+Product
+Register
+Login
+Table
 
-Branch `develop` ini juga saya deploy menggunakan Vercel. teman-teman bisa melihat tampilan UI nya di: [https://final-project-react-fitriningtyas.vercel.app/](https://final-project-react-fitriningtyas.vercel.app/)
+
+## API
+API sudah disediakan oleh mentor bootcamp
+
+
+## Framework
+React
+TailwindCSS
+
+
+## Package
+react-router-dom
+material-ui-confirm
+
+
+## Branch
+`main` berisi codingan yang saya kumpulkan sebagai tugas final project
+
+
+## Links
+Website :
